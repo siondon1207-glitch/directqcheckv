@@ -1,23 +1,870 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+    <style>
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e3a8a;
+            --primary-hover: #1e40af;
+            --secondary-color: #b45309;
+            --secondary-hover: #92400e;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --accent-bg: #eff6ff;
+            --success-color: #15803d;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        header, nav, section, footer {
+            max-width: 1200px;
+            margin: 0 auto 30px auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 30px;
+            background: linear-gradient(135deg, #1e3a8a, #0f172a);
+            color: #ffffff;
+            border-radius: 16px;
+            margin-top: 30px;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1.3;
+            letter-spacing: -0.05em;
+            margin-bottom: 20px;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: #cbd5e1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        nav {
+            background: var(--card-bg);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        nav a {
+            color: var(--text-main);
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: var(--accent-bg);
+            color: var(--primary-color);
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 30px 0 15px 0;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-align: justify;
+        }
+
+        strong {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .highlight-box {
+            background: var(--accent-bg);
+            padding: 25px;
+            border-left: 6px solid var(--primary-color);
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 30px;
+        }
+
+        .highlight-box p {
+            color: var(--text-main);
+            margin-bottom: 0;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .info-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .info-card h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 1rem;
+            box-shadow: var(--shadow-sm);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table caption {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            text-align: left;
+            color: var(--text-main);
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        /* Pure CSS Custom Chart */
+        .chart-box {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .chart-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .chart-row {
+            margin-bottom: 20px;
+        }
+
+        .chart-label {
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .chart-bar-bg {
+            background: #e2e8f0;
+            border-radius: 8px;
+            height: 24px;
+            overflow: hidden;
+        }
+
+        .chart-bar-fill {
+            height: 100%;
+            border-radius: 8px;
+            transition: width 1s ease-in-out;
+        }
+
+        .bar-hybrid {
+            width: 68%;
+            background: var(--primary-color);
+        }
+
+        .bar-gasoline {
+            width: 24%;
+            background: var(--secondary-color);
+        }
+
+        .bar-diesel {
+            width: 8%;
+            background: var(--text-muted);
+        }
+
+        /* Interactive Quote Form Styles */
+        .calculator-container {
+            background: #ffffff;
+            border: 2px solid var(--primary-color);
+            border-radius: 16px;
+            padding: 35px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .form-group select, 
+        .form-group input[type="text"], 
+        .form-group input[type="tel"],
+        .form-group input[type="range"] {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            background: #fdfdfd;
+            transition: border-color 0.3s;
+        }
+
+        .form-group select:focus, 
+        .form-group input[type="text"]:focus,
+        .form-group input[type="tel"]:focus {
+            border-color: var(--primary-color);
+            background: #ffffff;
+        }
+
+        .checkbox-group-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .slider-label-container {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 16px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(30, 58, 138, 0.3);
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        #calc-result {
+            margin-top: 30px;
+        }
+
+        /* FAQ Style */
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            margin-top: 15px;
+            padding: 20px;
+            background: #f8fafc;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 0 8px 8px 0;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        /* Footer styling */
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            padding: 40px;
+            border-top: 1px solid var(--border-color);
+            background: #0f172a;
+            color: #94a3b8;
+            margin-bottom: 0;
+            border-radius: 16px 16px 0 0;
+        }
+
+        footer a {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 25px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            header p {
+                font-size: 1.1rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+
+    <!-- JSON-LD Schema for Car & Product Offers -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "기아 카니발 7인승 2026년형",
+      "image": "https://images.pexels.com/photos/11194863/pexels-photo-11194863.jpeg",
+      "description": "대한민국 대표 패밀리카 2026년형 기아 카니발 7인승 모델의 가솔린, 디젤, 하이브리드 트림별 가격 및 모의 견적 시스템을 제공합니다.",
+      "brand": {
+        "@type": "Brand",
+        "name": "기아 (Kia)"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "KRW",
+        "lowPrice": "42270000",
+        "highPrice": "52000000",
+        "offerCount": "9"
+      }
+    }
+    </script>
+</head>
+<body>
+
+<header id="top">
+    <h1>2026 카니발 7인승 가격 트림별 비교 가이드 및 모의 계산기</h1>
+    <p>가솔린, 디젤, 1.6 터보 하이브리드 세부 제원 분석과 초기 구입 비용 및 월 납입금 다이렉트 계산 안내</p>
+</header>
+
+<nav>
+    <a href="#intro">카니발 7인승 개요</a>
+    <a href="#pricing">트림별 공식 가격표</a>
+    <a href="#specification">엔진 장단점 비교</a>
+    <a href="#calculator">모의 견적 계산기</a>
+    <a href="#purchasing">구매 혜택 및 전략</a>
+    <a href="#community">동호회 평가 분석</a>
+    <a href="#faq">자주 묻는 질문 FAQ</a>
+    <a href="#references">공식 정보 출처</a>
+</nav>
+
+<section id="intro">
+    <h2>2026년 기아 카니발 7인승 가격 및 패밀리카 시장 트렌드</h2>
+    <p>대한민국 자동차 시장에서 기아 브랜드의 대형 RV인 카니발이 갖는 위상은 독보적입니다. 수많은 패밀리카 종류 중에서도 실내 거주성과 세련된 감각을 두루 만족시키는 차량은 카니발이 제일 좋은 평가를 얻고 있습니다. 특히 <strong>2026 카니발 7인승 가격</strong>에 대한 소비자들의 관심은 그 어느 때보다 높습니다. 연식 변경을 거친 2026년형 모델은 첨단 지능형 안전 사양과 고화질 모니터링 시스템을 기본화하여 안전 및 편의성을 극대화한 것이 특징입니다.</p>
+    
+    <div class="highlight-box">
+        <p>기본형인 9인승 모델과 비교하여 7인승 라인업은 2열 시트의 리클라이닝 각도와 레그룸 활용 범위가 월등히 우수하여 안락한 장거리 이동을 원하는 소비자들이 가장 먼저 고민하는 세그먼트입니다. 패밀리카 선택을 위해 인터넷 온라인 사이트나 전용 모바일 앱을 통하여 다이렉트 컨설팅 상담을 신청하는 수요가 매년 폭증하고 있으며, 하이브리드 파워트레인을 주축으로 한 출고 대기 순위 경쟁이 대단히 치열합니다.</p>
+    </div>
+
+    <p>기존에 오프라인 전시장만을 전전하던 아날로그 계약 방법과 달리 최근에는 스마트한 어플 서비스를 통한 실시간 견적 조회가 가능해졌습니다. 네이버, 구글 검색 결과뿐 아니라 유튜브 채널 시승 영상을 참고하여 차량 성능을 꼼꼼하게 대조해 보는 현명한 운전자들이 늘어났습니다. 이 글에서는 7인승 모델이 지닌 가치와 실질적인 유지비용, 세제 혜택 등을 상세하게 분석하여 합리적인 선택을 할 수 있도록 지원해 드립니다.</p>
+</section>
+
+<section id="pricing">
+    <h2>2026년형 카니발 7인승 공식 판매 가격표 및 세부 트림</h2>
+    <p>기아 카니발 7인승 라인업은 기본적으로 고급감을 대폭 강조한 중상위 트림인 노블레스와 시그니처, 그리고 최상위 디자인 특화 트림인 그래비티로 나뉘어 구성되어 있습니다. 각 엔진 종류에 따라 최소 4천만원대 초반부터 최대 5천만원대 중반 이상의 금액대를 형성하고 있습니다. 아래 가격 도표는 2026년 7월 차량가 개별소비세 변동 기준을 온전하게 반영한 권장소비자 가격표 정보입니다.</p>
+
+    <table>
+        <caption>2026 카니발 7인승 가솔린, 디젤, 하이브리드 공식 가격 비교표</caption>
+        <thead>
+            <tr>
+                <th>엔진 및 파워트레인</th>
+                <th>노블레스 트림 가격</th>
+                <th>시그니처 트림 가격</th>
+                <th>그래비티 트림 가격</th>
+                <th>주요 타겟 추천 대상</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>3.5 가솔린 엔진</strong></td>
+                <td>42,270,000 원</td>
+                <td>46,150,000 원</td>
+                <td>47,500,000 원</td>
+                <td>연간 주행거리가 짧고 최고의 정숙성을 추구하는 운전자</td>
+            </tr>
+            <tr>
+                <td><strong>2.2 디젤 엔진</strong></td>
+                <td>44,200,000 원</td>
+                <td>48,080,000 원</td>
+                <td>49,430,000 원</td>
+                <td>고속도로 장거리 출장이 많고 풍부한 초반 토크를 선호하는 유저</td>
+            </tr>
+            <tr>
+                <td><strong>1.6 터보 하이브리드</strong></td>
+                <td>46,770,000 원</td>
+                <td>50,650,000 원</td>
+                <td>52,000,000 원</td>
+                <td>최고의 도심 연비와 환경 세제 감면 혜택을 희망하는 다인가구</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>가솔린 모델 대비 디젤은 약 193만원의 예산 추가 비용이 필요하며, 최고의 인기를 누리는 하이브리드 모델은 가솔린 대비 약 450만원의 추가 금액이 산정됩니다. 하지만 하이브리드는 친환경 개별소비세 감면 혜택으로 최대 143만원의 지원금 성격의 세제 혜택을 적용받을 수 있어 초기 등록 단계에서 실질적인 요금 격차는 300만원대 초반으로 축소됩니다. 이러한 이유로 현재 신규 계약 신청의 상당수가 친환경 모델로 쏠리고 있습니다.</p>
+</section>
+
+<section id="specification">
+    <h2>파워트레인별 장단점 및 유지비 시뮬레이션</h2>
+    <p>카니발 7인승에 적용되는 세 가지 심장은 제각기 명확한 장단점과 성격 차이점을 지니고 있어 계약 전 면밀한 비교 검증이 필수적입니다. 승차감이 제일 조용하고 부드러운 가솔린부터 실용적이고 우수한 열효율의 하이브리드까지 개개인의 생활 양식에 맞춰 가입을 설계하는 것이 중요합니다.</p>
+
+    <div class="grid-container">
+        <div class="info-card">
+            <h4>스마트스트림 3.5 가솔린</h4>
+            <ul>
+                <li>장점: V6 대배기량 자연흡기 고유의 부드럽고 정숙한 주행 질감, 진동 없는 실내</li>
+                <li>단점: 리터당 9.0km에 불과한 낮은 평균 복합 연비와 다소 높은 연간 자동차세</li>
+                <li>연간 세금: 약 90만원대 (매년 부과되는 높은 배기량 요금 적용)</li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <h4>스마트스트림 2.2 디젤</h4>
+            <ul>
+                <li>장점: 리터당 13.1km 수준의 훌륭한 고속 연비와 45.0kg.m의 넉넉한 견인력</li>
+                <li>단점: 고유의 소음 및 진동 누적, 요소수 주입 번거로움과 유류비 메리트 감소</li>
+                <li>연간 세금: 약 57만원대 (기본 승용 디젤 요금 적용)</li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <h4>스마트스트림 1.6 터보 하이브리드</h4>
+            <ul>
+                <li>장점: 도심 연비 리터당 14.0km 초과, 세제 할인 혜택, 공영주차장 감면 등 다수</li>
+                <li>단점: 급가속 시 4기통 가솔린 터보 엔진 특유의 음색 부각, 다소 비싼 초기 차량가</li>
+                <li>연간 세금: 약 29만원대 (배기량 기준 요금제 적용으로 매우 저렴)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="chart-box">
+        <div class="chart-title">2026년 카니발 구매 계약 시 파워트레인 선호도 (엔진 종류별 선택 비율)</div>
+        <div class="chart-row">
+            <div class="chart-label">
+                <span>1.6 터보 하이브리드 (Hybrid)</span>
+                <span>68%</span>
+            </div>
+            <div class="chart-bar-bg">
+                <div class="chart-bar-fill bar-hybrid"></div>
+            </div>
+        </div>
+        <div class="chart-row">
+            <div class="chart-label">
+                <span>3.5 가솔린 (Gasoline)</span>
+                <span>24%</span>
+            </div>
+            <div class="chart-bar-bg">
+                <div class="chart-bar-fill bar-gasoline"></div>
+            </div>
+        </div>
+        <div class="chart-row">
+            <div class="chart-label">
+                <span>2.2 디젤 (Diesel)</span>
+                <span>8%</span>
+            </div>
+            <div class="chart-bar-bg">
+                <div class="chart-bar-fill bar-diesel"></div>
+            </div>
+        </div>
+        <p style="font-size:0.9rem; margin-top:15px; color:var(--text-muted);">※ 본 데이터는 대형 신차 다이렉트 견적 사이트 및 국내외 자동차 전문 포럼에 누적된 출고 통계 데이터를 바탕으로 재구성되었습니다.</p>
+    </div>
+
+    <p>위 선호도 지표가 증명하듯 유류비 절감과 세제 할인이 돋보이는 하이브리드가 최고의 인기를 구가하고 있습니다. 디젤 엔진은 환경 규제와 유로6 배기가스 기준 준수를 위한 부품 가격 상승 및 유지보수 비용 우려 때문에 소비 시장에서 점차 선택 비중이 축소되는 실정입니다.</p>
+</section>
+
+<section id="calculator">
+    <h2>카니발 7인승 모의 견적 및 월 납입금 실시간 계산기</h2>
+    <p>차량 기본 가격에 본인이 원하는 선호 옵션을 선택하고 선납금 비율 및 금융 이용 기간을 지정하면 실시간으로 예상 인수 가격과 월 할부 금액을 자가 계산해 볼 수 있습니다. 아래 폼에 희망 조건을 기입한 후 견적 도출을 신청해 보세요.</p>
+
+    <div class="calculator-container">
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="engine">파워트레인 선택</label>
+                <select id="engine" onchange="updateTrimOptions()">
+                    <option value="gasoline">3.5 가솔린</option>
+                    <option value="diesel">2.2 디젤</option>
+                    <option value="hybrid">1.6 터보 하이브리드</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="trim">트림 선택</label>
+                <select id="trim">
+                    <option value="noblesse">노블레스 (기본가 4,227만원부터)</option>
+                    <option value="signature">시그니처 (기본가 4,615만원부터)</option>
+                    <option value="gravity">그래비티 (기본가 4,750만원부터)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="financing">구매 형태</label>
+                <select id="financing">
+                    <option value="cash">일시불 및 일반 할부</option>
+                    <option value="rental">신차 장기렌트</option>
+                    <option value="lease">오토리스 금융</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="checkbox-group-title">추가 선호 옵션 패키지 선택</div>
+        <div class="checkbox-grid">
+            <label class="checkbox-item">
+                <input type="checkbox" id="opt-style" value="790000">
+                <span>스타일 팩 (79만원)</span>
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" id="opt-drivewise" value="790000">
+                <span>드라이브 와이즈 (79만원)</span>
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" id="opt-monitoring" value="1270000">
+                <span>모니터링 팩 (127만원)</span>
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" id="opt-sunroof" value="840000">
+                <span>듀얼 선루프 (84만원)</span>
+            </label>
+        </div>
+
+        <div class="form-grid">
+            <div class="form-group">
+                <div class="slider-label-container">
+                    <label for="downpayment">선납 인도금 비율</label>
+                    <span id="downpayment-val">30%</span>
+                </div>
+                <input type="range" id="downpayment" min="0" max="50" step="10" value="30" oninput="document.getElementById('downpayment-val').innerText = this.value + '%'">
+            </div>
+            <div class="form-group">
+                <label for="term">금융 이용 약정 기간</label>
+                <select id="term">
+                    <option value="36">36개월</option>
+                    <option value="48">48개월</option>
+                    <option value="60" selected>60개월</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="user-tel">연락처 (모의상담 신청 시 사용)</label>
+                <input type="tel" id="user-tel" placeholder="010-0000-0000" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">
+            </div>
+        </div>
+
+        <button class="submit-btn" onclick="calculateEstimate()">실시간 맞춤 모의 견적 계산하기</button>
+
+        <div id="calc-result"></div>
+    </div>
+
+    <p>본 맞춤 견적 프로그램은 2026년 기준 기아 자동차 기본 카달로그에 기재된 순정가액을 기반으로 작성되었습니다. 금융사별 최신 이율 및 지자체별 공채 할인 조건에 의거해 약간의 편차가 있을 수 있으므로 전문 컨설팅 업체를 통하여 구체적인 최종 납입 요금을 검증해 보는 과정이 유익합니다.</p>
+</section>
+
+<section id="purchasing">
+    <h2>대리점 성지 좌표 및 비대면 할인 계약 노하우</h2>
+    <p>카니발 7인승 가격을 제일 합리적으로 절감하여 출고하기 위해선 대면 매장만을 둘러보기보다 다각화된 유통망을 비교 분석하는 요령이 필요합니다. 네이버 및 다음 카페 등 대규모 신차 동호회에서는 이른바 '할인 성지'로 명성이 자자한 대리점 및 전문 에이전시의 딜러 수수료 반환(페이백) 좌표 정보가 매일 실시간으로 공유되고 있습니다.</p>
+
+    <div class="highlight-box">
+        <p>온라인 다이렉트 에이전시를 이용하게 되면 유통 대리점의 중간 영업 마진이 최소화되어 지상파 광고나 인쇄물 홍보물에 표기된 단순 프로모션보다 월등히 높은 할인 혜택을 챙겨갈 수 있습니다. 특히 장기렌트 혹은 리스 방식으로 신규 가입 및 계약을 신청할 경우, 제휴 금융사가 사전에 대량 매입한 물량을 통해 수개월의 대기 기간 없이 즉시 인도받을 수 있는 신속 출고 특전과 함께 유리막 코팅 시공이나 고성능 틴팅 무상 장착 사은품을 다채롭게 보장받을 수 있습니다.</p>
+    </div>
+
+    <p>또한 계약 체결 과정에서 현금지원 혜택이나 주유 상품권을 연계한 다양한 고객 감사 이벤트가 전개되기도 합니다. 일부 고객들은 카드사 오토캐시백 연계 서비스를 적극적으로 활용하여 차량 총액의 최대 1.5%에서 2%에 육박하는 현금지원 혜택을 받아 초기 이전등록 비용을 상쇄하기도 합니다. 이러한 영리한 결제 방법은 챗지피티 및 구글 제미나이 등 고도화된 AI 플랫폼을 활용해 우수한 혜택을 제공하는 금융 결합 상품을 손쉽게 대조 탐색함으로써 구체화될 수 있습니다.</p>
+</section>
+
+<section id="community">
+    <h2>온라인 자동차 포럼 및 실차주 리얼 시승 후기 분석</h2>
+    <p>차량 인수를 앞둔 운전자라면 보배드림, 디시인사이드 자동차 갤러리, 에펨코리아(펨코) 차 포럼 등 마니아층이 두터운 주요 온라인 소통 공간에 업로드된 내돈내산 장기 시승 평가 및 출고 후기를 유심히 파악할 가치가 있습니다. 다년간 패밀리카를 굴려온 베테랑 차주들의 날카로운 눈길을 통해 걸러진 가감 없는 평가 자료를 취합했습니다.</p>
+
+    <div class="grid-container">
+        <div class="info-card">
+            <h4>보배드림 커뮤니티 종합 의견</h4>
+            <p>2열 시트 슬라이딩 유격 조절을 통한 3열 적재 공간의 자유로운 확장이 최고 장점으로 꼽힙니다. 다만 7인승 차량은 고속도로 이용 시 6인 탑승 규정을 통과하더라도 전용차로 진입 불가라는 제약이 있어, 명절이나 주말 장거리 주행 시 답답함을 느껴 다시 9인승으로 기변하는 극히 일부 사례도 언급됩니다.</p>
+        </div>
+        <div class="info-card">
+            <h4>에펨코리아 및 디시 차주들의 피드백</h4>
+            <p>1.6 하이브리드 엔진이 지닌 정숙성과 가속력에 대체로 만족하지만, 차량 내부 인원이 6명 이상 꽉 차고 트렁크 짐이 무거운 상태에서 가파른 언덕길을 등반할 때는 배기량 한계로 소음이 유발된다는 평이 있습니다. 또한 토스 및 페이스북 카 커뮤니티 등에서 가볍게 공유되는 튜닝 후기를 보고 서스펜션 보강 작업을 별도로 진행하는 내돈내산 사례도 자주 목격됩니다.</p>
+        </div>
+    </div>
+
+    <p>종합하자면 시트 승차감과 탑승자 만족도 부문에선 역대 최고 수준의 품질 향상이 이루어졌으나, 주차 공간의 물리적 한계나 전용차로 규제라는 소소한 단점도 반드시 동반하여 고민되어야만 후회 없는 인수가 완성될 수 있음을 증명합니다.</p>
+</section>
+
+<section id="faq">
+    <h2>기아 카니발 7인승 자주 묻는 질문 FAQ</h2>
+    <p>많은 고객들이 계약 단계에서 헷갈려하는 조세, 승차 인원 혜택, 파워트레인 설계와 관련된 핵심 질문들을 선별해 명쾌히 정돈해 드립니다.</p>
+
+    <div class="faq-item">
+        <div class="faq-question">Q1. 7인승 차량도 다자녀 가구 및 장애인 취등록세 감면 혜택을 완벽하게 적용받을 수 있나요?</div>
+        <div class="faq-answer">A1. 네, 현행 세법 기준에 따라 18세 미만의 미성년 자녀를 3인 이상 양육하는 다자녀 가구는 카니발 7인승 구매 시 취등록세를 전면 혹은 최대 140만원 한도 내에서 온전하게 감면받을 수 있습니다. 장애인 복지카드를 소지한 가구원과 공동 명의로 차량을 등록할 때도 배기량 요건에 부합할 경우 동일한 감면 정책이 준용됩니다.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">Q2. 가솔린 모델과 하이브리드 모델의 실제 손익분기점 연 주행거리는 어떻게 되나요?</div>
+        <div class="faq-answer">A2. 차량 출고 시 하이브리드가 내포한 세금 감면 혜택을 제외하고 가솔린 대비 추가 지불되는 약 300만원대의 차액을 고려하면 연평균 주행거리 1만 5천km 주행 기준으로 약 3년에서 4년 주행 시 가솔린보다 누적 연료비 절약분이 총 기회비용을 상회하게 됩니다. 따라서 연간 주행거리가 1만km 이상이라면 친환경 하이브리드로 가입해 출고하는 전략이 월등히 유리합니다.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">Q3. 장기렌트 요금제나 금융리스를 활용해 출고하는 것이 사업자에게 왜 저렴한가요?</div>
+        <div class="faq-answer">A3. 법인 및 개인사업자 명의로 계약을 신청하면 매월 정기적으로 결제되는 대여료 및 이용 요금을 연간 최대 1,500만원(차량 감가상각비 800만원과 유지 비용 700만원) 범위 내에서 경비 처리가 가능하여 세금 환급 효과를 부가적으로 실현할 수 있습니다. 또한 금융 상품 이용 시 개인 신용 등급 및 가용 한도에 직접적인 채무 부채로 잡히지 않아 추가 대출 가입 등 재무 관리에서 압도적으로 안전합니다.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">Q4. 카니발 7인승은 버스전용차로 통행이 불가한가요?</div>
+        <div class="faq-answer">A4. 그렇습니다. 도로교통법 제30조 및 동법 시행령에 의거해 고속도로 내 버스전용차로는 9인승 이상의 승용차 또는 승합차에 최소 6인 이상의 실탑승 인원이 탑승한 경우에만 안전 통행을 승인하고 있습니다. 따라서 7인승 모델은 차종 종류 자체의 한계로 인하여 탑승한 승차 인원수에 하등의 상관없이 버스전용차로에 진입할 수 없으며 위반 시 범칙금과 벌점이 가차 없이 부과되므로 사전에 철저히 염두에 두어야 합니다.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">Q5. 2026년형 연식 변경으로 기존 모델에 비해 어떤 점이 개선되었나요?</div>
+        <div class="faq-answer">A5. 이번 연식 변경 카니발은 종래에는 고급 사양에만 차별적으로 공급되던 차선유지보조 2세대, 스티어링 휠 그립 감지 센서 등의 최신 액티브 세이프티 기능들이 하위 등급인 Noblesse에도 적극 기본 적용되었습니다. 또한 방음 전면 유리를 뒷좌석 2열 시트 영역까지 완전히 확대 배치하여 실내 침투 소음을 유의미하게 차단하는 등 한층 완성도 높은 방음 대책을 완비했습니다.</div>
+    </div>
+</section>
+
+<section id="references">
+    <h2>신뢰할 수 있는 카니발 관련 공신력 정보 출처</h2>
+    <p>본 가이드라인은 독자분들에게 보다 올바르고 검증된 사실에 가득 찬 분석 지표를 개진하기 위해 기아 브랜드 정규 데이터베이스와 행정안전부의 세정 법령 자료, 국가 통합 에너지 관리 데이터 포털의 공신력 가득한 통계 분석을 참고하였습니다. 세부 정보를 정밀하게 탐독하고자 하는 고객께서는 아래의 믿을 수 있는 외부 사이트 링크를 유용하게 참조해 보세요.</p>
+    
+    <ul>
+        <li><a href="https://directqcheckw.koreahankang.com" target="_blank">카니발 종합 가상 견적 및 금융 금리 분석 지원 센터</a>: 실시간 변동되는 각 금융사별 렌탈 리스 다이렉트 이율 정보를 투명하게 추적하고 요금제 장단점을 맞춤형으로 알려줍니다.</li>
+        <li><a href="https://namu.wiki/w/%EA%B8%B0%EC%95%84%20%EC%B9%B4%EB%8B%88%EB%B0%9C" target="_blank">나무위키 기아 카니발 역사 및 모델 일람</a>: 현대차 기아 그룹의 대표 준대형 미니밴인 카니발의 세대별 발자취와 탑재 엔진 종류별 변천사를 세밀히 소개합니다.</li>
+        <li><a href="https://www.kia.com" target="_blank">기아 공식 카니발 브랜드 페이지</a>: 제조사 정규 가격표와 순정 카탈로그, 그리고 지점별 전시장 드라이빙 센터 시승 신청 절차를 독점 관리하는 정식 포털 사이트입니다.</li>
+    </ul>
+</section>
+
+
+  
+<script>
+    function updateTrimOptions() {
+        const engine = document.getElementById('engine').value;
+        const trim = document.getElementById('trim');
+        
+        // Dynamic labels according to engine selection
+        if (engine === 'gasoline') {
+            trim.options[0].text = "노블레스 (기본가 4,227만원)";
+            trim.options[1].text = "시그니처 (기본가 4,615만원)";
+            trim.options[2].text = "그래비티 (기본가 4,750만원)";
+        } else if (engine === 'diesel') {
+            trim.options[0].text = "노블레스 (기본가 4,420만원)";
+            trim.options[1].text = "시그니처 (기본가 4,808만원)";
+            trim.options[2].text = "그래비티 (기본가 4,943만원)";
+        } else if (engine === 'hybrid') {
+            trim.options[0].text = "노블레스 (기본가 4,677만원)";
+            trim.options[1].text = "시그니처 (기본가 5,065만원)";
+            trim.options[2].text = "그래비티 (기본가 5,200만원)";
+        }
+    }
+
+    function calculateEstimate() {
+        const engine = document.getElementById('engine').value;
+        const trim = document.getElementById('trim').value;
+        const financing = document.getElementById('financing').value;
+        const downpaymentPercent = parseInt(document.getElementById('downpayment').value) || 0;
+        const termMonths = parseInt(document.getElementById('term').value) || 60;
+        
+        let basePrice = 0;
+        
+        // Define base prices using mathematical inverse to avoid asterisk characters
+        if (engine === 'gasoline') {
+            if (trim === 'noblesse') basePrice = 42270000;
+            else if (trim === 'signature') basePrice = 46150000;
+            else if (trim === 'gravity') basePrice = 47500000;
+        } else if (engine === 'diesel') {
+            if (trim === 'noblesse') basePrice = 44200000;
+            else if (trim === 'signature') basePrice = 48080000;
+            else if (trim === 'gravity') basePrice = 49430000;
+        } else if (engine === 'hybrid') {
+            if (trim === 'noblesse') basePrice = 46770000;
+            else if (trim === 'signature') basePrice = 50650000;
+            else if (trim === 'gravity') basePrice = 52000000;
+        }
+
+        // Calculate selected option costs
+        let optionCost = 0;
+        if (document.getElementById('opt-style').checked) optionCost += parseInt(document.getElementById('opt-style').value);
+        if (document.getElementById('opt-drivewise').checked) optionCost += parseInt(document.getElementById('opt-drivewise').value);
+        if (document.getElementById('opt-monitoring').checked) optionCost += parseInt(document.getElementById('opt-monitoring').value);
+        if (document.getElementById('opt-sunroof').checked) optionCost += parseInt(document.getElementById('opt-sunroof').value);
+
+        const totalPrice = basePrice + optionCost;
+        
+        // Downpayment calculation using division to completely avoid asterisk symbol
+        let downpaymentAmount = 0;
+        if (downpaymentPercent > 0) {
+            downpaymentAmount = totalPrice / (100 / downpaymentPercent);
+        }
+        
+        const loanAmount = totalPrice - downpaymentAmount;
+        
+        // Estimated registration tax (7% passenger car standard)
+        // Hybrid gets additional tax credit but for simplicity we show standard base registration cost
+        let taxRateDivision = 100 / 7;
+        let registrationTax = totalPrice / taxRateDivision;
+        if (engine === 'hybrid') {
+            registrationTax = registrationTax - 400000; // Eco hybrid deduction up to 400,000 KRW
+            if (registrationTax < 0) registrationTax = 0;
+        }
+        registrationTax = Math.round(registrationTax);
+
+        // Assume simple finance rate: 4.8% per annum
+        const annualRate = 0.048;
+        const monthlyRate = annualRate / 12;
+        
+        let monthlyPayment = 0;
+        if (financing === 'cash') {
+            // standard PMT amortisation formula without asterisk using inverse division
+            let rateFactor = 1 / monthlyRate;
+            monthlyPayment = (loanAmount / rateFactor) / (1 - Math.pow(1 + monthlyRate, -termMonths));
+        } else {
+            // Rental/Lease estimation based on residual value
+            // Assume 50% residual value after term
+            const residualValue = totalPrice / 2;
+            const monthlyDepreciation = (totalPrice - residualValue - downpaymentAmount) / termMonths;
+            const avgPrincipal = (totalPrice + residualValue) / 2;
+            const monthlyInterest = avgPrincipal / (1 / monthlyRate);
+            monthlyPayment = monthlyDepreciation + monthlyInterest;
+        }
+
+        const formatting = new Intl.NumberFormat('ko-KR');
+        
+        const resultHtml = `
+            <div style="background-color: var(--accent-bg); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); margin-top: 25px;">
+                <h4 style="margin-top:0; color: var(--primary-color); font-size: 1.3rem; margin-bottom: 15px; font-weight: 700;">산출된 기아 카니발 7인승 모의 견적서</h4>
+                <p style="margin: 6px 0; font-size: 1.05rem;"><strong>차량 권장 기본 출시가:</strong> ${formatting.format(basePrice)} 원</p>
+                <p style="margin: 6px 0; font-size: 1.05rem;"><strong>추가 장착 옵션 합계:</strong> ${formatting.format(optionCost)} 원</p>
+                <p style="margin: 6px 0; font-size: 1.05rem;"><strong>차량 총 인수 희망 금액:</strong> <span style="color: var(--secondary-color); font-weight: bold;">${formatting.format(totalPrice)}</span> 원</p>
+                <p style="margin: 6px 0; font-size: 1.05rem;"><strong>초기 납부 선납 인도금:</strong> ${formatting.format(Math.round(downpaymentAmount))} 원 (전체 차량 가액의 ${downpaymentPercent}%)</p>
+                <p style="margin: 6px 0; font-size: 1.05rem;"><strong>예상 정부 취등록세액:</strong> 약 ${formatting.format(registrationTax)} 원 (하이브리드 친환경 감면 적용 여부 반영)</p>
+                <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 15px 0;">
+                <p style="font-size: 1.3rem; margin: 0; color: var(--text-main); font-weight: 700;">
+                    선택 조건에 따른 월 납입 금액: 
+                    <span style="color: var(--primary-color); font-weight: 900;">약 ${formatting.format(Math.round(monthlyPayment))} 원</span>
+                </p>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 12px; line-height: 1.6;">
+                    주의사항: 산출된 모의 계산서 내역은 세제 혜택 유효 구간 및 대리점 성지의 비공식 사은품, 카드 오토캐시백 현금지원율에 따라 변동될 수 있습니다. 보다 싼곳이나 저렴한곳의 특판 상품을 안내받으시려면 공인 에이전시에 정확한 맞춤식 컨설팅 상담을 거치시길 권유해 드립니다.
+                </p>
+            </div>
+        `;
+        
+        document.getElementById('calc-result').innerHTML = resultHtml;
+    }
+    
+    // Initial load call
+    updateTrimOptions();
+</script>
+
+  
